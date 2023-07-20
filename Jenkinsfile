@@ -26,12 +26,14 @@ pipeline {
      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/project1/targets/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
    }
  }
+  
  stage(creation of docker image) {
    steps {
    echo 'inform me that docker images is created '
    sh 'docker build -t kranthi619/project1:latest .'
    }
  }
+  
  stage('docker hub login') {
    steps {
    withCredentials([usernamePassword(credentialsId: 'docker-hub-cre', passwordVariable: 'docker_passwd', usernameVariable: 'docker_usr')]) {
