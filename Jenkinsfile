@@ -27,7 +27,7 @@ pipeline {
    }
  }
   
- stage(creation of docker image) {
+ stage('creation of docker image') {
    steps {
    echo 'inform me that docker images is created '
    sh 'docker build -t kranthi619/project1:latest .'
