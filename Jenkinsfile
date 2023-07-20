@@ -30,21 +30,21 @@ pipeline {
  stage('creation of docker image') {
    steps {
    echo 'inform me that docker images is created '
-   sh 'sudo docker build -t kranthi619/project1:latest .'
+   sh 'docker build -t kranthi619/project1:latest .'
    }
  }
   
  stage('docker hub login') {
    steps {
    withCredentials([usernamePassword(credentialsId: 'Docker-Hub', passwordVariable: 'docker_passwd', usernameVariable: 'docker_usr')]) {
-   sh 'sudo docker login -u ${env.docker_usr} -p ${env.docker_passwd}'
+   sh 'docker login -u ${env.docker_usr} -p ${env.docker_passwd}'
    }
   }
  }
   
  stage('pushing image ro docker hub') {
    steps {
-   sh 'sudo docker push kranthi619/project1:latest'
+   sh 'docker push kranthi619/project1:latest'
     }
   }
 }
