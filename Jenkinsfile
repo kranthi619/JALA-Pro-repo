@@ -34,10 +34,15 @@ pipeline {
  }
  stage('docker hub login') {
    steps {
-   sh 'docker login -u ${env.docker-hub-cre}
+   withCredentials([usernamePassword(credentialsId: 'docker-hub-cre', passwordVariable: 'docker_passwd', usernameVariable: 'docker_usr')]) {
+   sh 'docker login -u ${env.docker_usr} -p ${env.docker_passwd}'
+   }
+  }
+ }
+  
  stage('pushing image ro docker hub') {
    steps {
-   sh 'docker push kranthi619/project1'
+   sh 'docker push kranthi619/project1:latest'
     }
   }
 }
