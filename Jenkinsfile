@@ -25,5 +25,6 @@ pipeline {
      echo " this is HTML reports"
      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/project1/targets/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
    }
- }
-} 
+  }
+ } 
+}
