@@ -16,7 +16,7 @@ pipeline {
   stage('packaging the application usimg maven ') {
     steps {
       echo ' packaging the application using maven '
-      sh 'mvn cleane package'
+      sh 'mvn clean package'
     }
  }
   
