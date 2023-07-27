@@ -47,5 +47,10 @@ pipeline {
                 sh 'docker push kranthi619/project1:latest'
             }
         }
+       stage('deployimg application using Ansible') {
+           steps {
+             ansiblePlaybook credentialsId: 'ansible-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
+        }
+      }
     }
 }
