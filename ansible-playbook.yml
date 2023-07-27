@@ -9,6 +9,10 @@
     - name: install python and pip
       command: sudo apt-get install -y python-pip
 
+    - name: remove conflicting packages
+      command: sudo apt-get remove -y containerd.io runc
+      ignore_errors: yes
+
     - name: installing docker
       command: sudo apt-get install -y docker.io
       become: yes
@@ -21,4 +25,5 @@
 
     - name: Deploy Docker Container
       command: docker run -itd -p 8084:8081 kranthi619/project1:latest
+
 
