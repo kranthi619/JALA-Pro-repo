@@ -1,20 +1,24 @@
 ---
-
 - name: installing Docker in host
-  host: server
+  hosts: server
   become: true
   tasks: 
-  - name: updating server
-    command: sudo apt update
-  - name: install python and pip
-    command: sudo install -y python-pip
-  - name: installing docker
-    command: sudo apt-get install -y docker.io
-    become: yes
-    becomae_user: root
-  - name: starting docker service using systemctl
-    command: sudo systemctl start docker
-    become: yes
-    become_user: root
-  - name: Deploy Docker Container
-    command: docker run -itd -p 8084:8081 kranthi619/project1:latest
+    - name: updating server
+      command: sudo apt update
+
+    - name: install python and pip
+      command: sudo apt-get install -y python-pip
+
+    - name: installing docker
+      command: sudo apt-get install -y docker.io
+      become: yes
+      become_user: root
+
+    - name: starting docker service using systemctl
+      command: sudo systemctl start docker
+      become: yes
+      become_user: root
+
+    - name: Deploy Docker Container
+      command: docker run -itd -p 8084:8081 kranthi619/project1:latest
+
