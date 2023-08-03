@@ -1,29 +1,21 @@
 ---
-- name: installing Docker in host
-  hosts: server
+- name: Configure Docker on DeployServer
+  hosts:  server
   become: true
-  tasks: 
-    - name: updating server
+  tasks:
+    - name: apt updating
       command: sudo apt update
-
-    - name: install python and pip
-      command: sudo apt-get install -y python-pip
-
-    - name: remove conflicting packages
-      command: sudo apt-get remove -y containerd.io runc
-      ignore_errors: yes
-
-    - name: installing docker
+    - name: Install python and pip
+      command: sudo apt install -y python pip
+    - name: instaling Docker
       command: sudo apt-get install -y docker.io
       become: yes
       become_user: root
-
-    - name: starting docker service using systemctl
+    - name: Start Docker service using systemctl
       command: sudo systemctl start docker
       become: yes
       become_user: root
-
-    - name: Deploy Docker Container
+    - name: Deploye the Image from DockerHub and Run as Container
       command: docker run -itd -p 8084:8081 kranthi619/project1:latest
 
 
