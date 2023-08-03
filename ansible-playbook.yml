@@ -1,6 +1,6 @@
 ---
 - name: installing Docker in host
-  hosts: [server]
+  hosts: server
   become: true
   tasks: 
     - name: updating server
