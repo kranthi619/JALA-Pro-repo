@@ -29,7 +29,7 @@ pipeline {
 
         stage('docker hub login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPass\'', usernameVariable: 'dockerUsr ')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPass', usernameVariable: 'dockerUsr')]) {
                     sh 'docker login -u $dockerUsr -p $dockerPass'
                 }
             }
@@ -40,4 +40,7 @@ pipeline {
                 sh 'docker push kranthi619/project1:latest'
             }
         }
+    }
+}
+
        
