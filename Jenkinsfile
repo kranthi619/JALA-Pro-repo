@@ -9,7 +9,7 @@ pipeline {
         stage('git checkout') {
             steps {
                 echo 'check out the source code from git hub'
-                git 'https://github.com/kranthi619/finance-pro.git'
+                git 'https://github.com/kranthi619/JALA-Pro-repo.git'
             }
         }
 
@@ -17,13 +17,6 @@ pipeline {
             steps {
                 echo 'packaging the application using maven'
                 sh 'mvn clean package'
-            }
-        }
-
-        stage('publishing reports using HTML') {
-            steps {
-                echo "this is HTML reports"
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/project1/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
         }
 
@@ -36,7 +29,7 @@ pipeline {
 
         stage('docker hub login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'dockerPass', usernameVariable: 'dockerUsr')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPass\'', usernameVariable: 'dockerUsr ')]) {
                     sh 'docker login -u $dockerUsr -p $dockerPass'
                 }
             }
@@ -47,10 +40,4 @@ pipeline {
                 sh 'docker push kranthi619/project1:latest'
             }
         }
-       stage('deployimg application using Ansible') {
-           steps {
-             ansiblePlaybook credentialsId: 'ansible-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
-        }
-      }
-    }
-}
+       
